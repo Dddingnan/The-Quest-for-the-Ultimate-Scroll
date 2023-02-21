@@ -94,8 +94,7 @@ public abstract class Monster {
 	}
 	
 	public void updateRun() {
-		runTime--;
-		runTime = runTime < 0 ? 0 : runTime;
+		runTime -= runTime == 0 ? 0 : 1;
 	}
 	
 	public int getType() {
@@ -109,7 +108,7 @@ public abstract class Monster {
 		return attCur == 0;
 	}
 	
-	public Banana shootBall(double x2, double y2) {
+	public EBall shootBall(double x2, double y2) {
 		attCur = attFeq;
 		return new Banana(attack, sp, getX(0.5), getY(0.5), x2, y2);
 	}

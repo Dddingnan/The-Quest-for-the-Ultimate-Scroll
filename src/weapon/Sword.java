@@ -4,8 +4,8 @@ import javafx.scene.image.Image;
 
 public class Sword extends MeleeWeapon {
 	private Image im = new Image("file:images/weapon/swords.png");
-	private static final int xs = 2 + 31 * 3;
-	private static final int ys = 0 + 31 * 2;
+	private static final int xs = 1 + 31 * 1;
+	private static final int ys = 1 + 31 * 0;
 	private static final int w = 31;
 	private static final int h = 31;
 	private static final int l = 80; // length of weapon

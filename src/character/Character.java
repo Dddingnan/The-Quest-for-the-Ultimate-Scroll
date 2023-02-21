@@ -38,6 +38,14 @@ public abstract class Character {
 		py += x * sp;
 	}
 	
+	public void setX(int n) {
+		px = n;
+	}
+	
+	public void setY(int n) {
+		py = n;
+	}
+	
 	public void take(MeleeWeapon w) {
 		weapon = w;
 	}
