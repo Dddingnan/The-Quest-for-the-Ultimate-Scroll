@@ -197,7 +197,7 @@ public class GameView extends Canvas {
 		if (st.roomClean()) {
 			if (st.room(0) != 0  && distOf2P(role.getX(0.5), role.getY(0.5), up_x + 25, up_y + 25) < 20) {
 				role.setX(600);
-				role.setY(700);
+				role.setY(600);
 				st.nextRoom(0);
 			} else if (st.room(1) != 0  && distOf2P(role.getX(0.5), role.getY(0.5), 1250, 325) < 20) {
 				role.setX(100);
