@@ -24,28 +24,25 @@ import character.Character;
 public class GameView extends Canvas {
 	private final double width;
 	private final double height;
-	private final int up_x = 600, up_y = 0;
+	private final int up_x = 600, up_y = 0; // position of upper gate
 	private final int right_x = 1225, right_y = 300;
 	private final int down_x = 600, down_y = 640;
 	private final int left_x = 0 , left_y = 300;
-	private double mouseX;
-	private double mouseY;
+	private double mouseX, mouseY;  // mouse position
 	private double deg;
 	private GameStage st;
-	private GraphicsContext gc;
+	private GraphicsContext gc; // for others
 	private GraphicsContext gc2; // for background
 	private Stage stage;
 	private Character role;
 	private List<Monster> ml;
 	private MeleeWeapon wp;
 	private ImageView iv;
-	boolean up;
-	boolean down;
-	boolean left;
-	boolean right;
+	private boolean up, down, left, right; // keyboard code
 	private List<EBall> ball;
 	
 	public GameView(BorderPane bp, Stage stage) {
+		// initialization
 		width = stage.getWidth();
 		height = stage.getHeight();
 		this.stage = stage;
@@ -225,11 +222,13 @@ public class GameView extends Canvas {
 			// if distance is less than attack range
 			if (dis < m.getRange()) {
 				if (m.getType() == 1) {
-					if (m.readyToAttack()) {
+					if (m.readyToStartAttack()) {
+						m.attackStart();
+					} else if (m.readyToAttack()) {
 						ball.add(m.shootBall(rx, ry));
 					}
 					if (!m.ifContinue())
-						m.newRun(rx < m.getX(0.5) ? (m.getX(0.5) < width ? 0.4 : 0) : (m.getX(0.5) > m.getWidth() ? -0.4 : 0), ry < m.getY(0.5) ? (m.getY(0.5) < height ? 0.4 : 0) : (m.getY(0.5) > m.getHeight() ? -0.4 : 0), 50);
+						m.newRun(Math.random() > 0.5 ? (m.getX(0.5) < width ? 0.4 : 0) : (m.getX(0.5) > m.getWidth() ? -0.4 : 0), Math.random() > 0.5 ? (m.getY(0.5) < height ? 0.4 : 0) : (m.getY(0.5) > m.getHeight() ? -0.4 : 0), 50);
 					m.changeX(m.getXD() > 0 ? (m.getX(0.5) < width ? m.getXD() : 0) : (m.getX(0.5) > m.getWidth() ? m.getXD() : 0));
 					m.changeY(m.getYD() > 0 ? (m.getY(0.5) < height - m.getHeight() ? m.getYD() : 0) : (m.getY(0.5) > m.getWidth() ? m.getYD() : 0));
 				}
@@ -264,7 +263,7 @@ public class GameView extends Canvas {
 				ball.remove(i);
 				role.getHur(b.getDamage());
 				System.out.println(role.getHealth());
-			}
+			} else if (b.getSX(0.5) < 0 || b.getSX(0.5) > width || b.getSY(0.5) < 0 || b.getSY(0.5) > height) ball.remove(i);
 			b.update();
 		}
 	}

@@ -104,12 +104,19 @@ public abstract class Monster {
 		attCur -= attCur == 0 ? 0 : 1;
 	}
 	
-	public boolean readyToAttack() {
+	public boolean readyToStartAttack() {
 		return attCur == 0;
 	}
 	
-	public EBall shootBall(double x2, double y2) {
+	public void attackStart() {
 		attCur = attFeq;
+	}
+	
+	public boolean readyToAttack() {
+		return attCur == attFeq / 2;
+	}
+	
+	public EBall shootBall(double x2, double y2) {
 		return new Banana(attack, sp, getX(0.5), getY(0.5), x2, y2);
 	}
 }
