@@ -18,7 +18,7 @@ public abstract class GameStage {
 	private int x, y;
 	
 	public GameStage() {
-		role = new Warrior(200, 200, 100, 5);
+		role = new Warrior(200, 200, 100);
 		role.take(new Sword());
 		cur_room = 1;
 		x = 10;
@@ -28,6 +28,10 @@ public abstract class GameStage {
 	
 	public Character getCharacter() {
 		return role;
+	}
+	
+	public Room getRoom() {
+		return map.get(cur_room);
 	}
 	
 	public List<Monster> getMonsters() {

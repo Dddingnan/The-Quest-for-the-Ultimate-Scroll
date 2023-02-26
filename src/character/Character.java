@@ -3,24 +3,31 @@ import javafx.scene.image.Image;
 import weapon.MeleeWeapon;
 
 public abstract class Character {
-	private final int height = 50;  // height of character
+	private final int height = 100;  // height of character
 	private final int width = 50; // width of character
 	private double px; // position of horizontal-axis
 	private double py; // position of vertical-axis
 	private int h; // health
 	private int sp; // speed
 	private MeleeWeapon weapon;
+	private int num_phase;
 	
-	public Character(int px, int py, int h, int sp) {
+	
+	public Character(int px, int py, int h, int sp, int np) {
 		this.px = px;
 		this.py = py;
 		this.h = h;
-
+		num_phase = np;
 		this.sp = sp;
 	}
 	
+	public int getPhase() {
+		return num_phase;
+	}
 	
 	public abstract Image getImage();
+	
+	public abstract void change(int n);
 
 	public double getX(double d) {
 		return px + width * d;

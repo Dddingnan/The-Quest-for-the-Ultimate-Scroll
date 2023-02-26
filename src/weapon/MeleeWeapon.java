@@ -26,7 +26,7 @@ public abstract class MeleeWeapon {
 		isReady = true;
 		
 	}
-	
+		
 	public int getXs() {
 		return xs;
 	}
