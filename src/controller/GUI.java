@@ -22,7 +22,7 @@ public class GUI extends Application {
 	    pane.setCenter(new GameView(pane, stage));
 	    Scene scene = new Scene(pane, stage.getWidth(), stage.getHeight());
 	    stage.setTitle("Scroll");
-	    stage.setResizable(true);
+	    stage.setResizable(false);
 	    stage.setScene(scene);
 	    stage.show();
 	}
