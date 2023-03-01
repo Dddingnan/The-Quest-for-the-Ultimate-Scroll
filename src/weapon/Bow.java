@@ -127,5 +127,9 @@ public class Bow extends Weapon {
 			b.update();
 		}
 	}
+	
+	public void remove() {
+		bp.getChildren().remove(iv);
+	}
 
 }

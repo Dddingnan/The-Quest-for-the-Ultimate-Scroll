@@ -98,5 +98,9 @@ public class Sword extends Weapon {
 		
 		attack();
 	}
+	
+	public void remove() {
+		bp.getChildren().remove(iv);
+	}
 
 }

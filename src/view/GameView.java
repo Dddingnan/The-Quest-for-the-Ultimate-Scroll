@@ -6,6 +6,8 @@ import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import stage.GameStage;
 import stage.StageOne;
+import weapon.Bow;
+import weapon.Sword;
 import weapon.Weapon;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
@@ -83,6 +85,18 @@ public class GameView extends Canvas {
 				break;
 			case S:
 				down = true;
+				break;
+			case C:
+				wp.remove();
+				wp = new Sword();
+				wp.setImView(ml, role, bp);
+				role.take(wp);
+				break;
+			case V:
+				wp.remove();
+				wp = new Bow();
+				wp.setImView(ml, role, bp);
+				role.take(wp);
 				break;
 			default:
 			}

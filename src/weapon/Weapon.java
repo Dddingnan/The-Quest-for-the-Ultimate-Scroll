@@ -58,4 +58,6 @@ public abstract class Weapon {
 	public abstract void update(double x,  double y, double d);
 	
 	public abstract void updateMonster(List<Monster> m);
+	
+	public abstract void remove();
 }
