@@ -2,8 +2,7 @@ package stage;
 
 import character.Warrior;
 import monster.Monster;
-import weapon.Sword;
-
+import weapon.Bow;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public abstract class GameStage {
 	
 	public GameStage() {
 		role = new Warrior(200, 200, 100);
-		role.take(new Sword());
+		role.take(new Bow());
 		cur_room = 1;
 		x = 10;
 		y = 10;

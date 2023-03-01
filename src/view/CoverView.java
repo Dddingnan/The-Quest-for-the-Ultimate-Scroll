@@ -18,11 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
-/**
- * The cover of this game.
- *
- * @author Jingwei Zhang
- */
+
 public class CoverView extends Canvas {
   private int option;
   private GraphicsContext gc = this.getGraphicsContext2D();
@@ -54,14 +50,17 @@ public class CoverView extends Canvas {
 	  timeline.play();
   }
 
-  /**
-   * Sets the options.
-   */
+
   public void setOption() {
 	  timeline.stop();
 	  switch (option) {
       	case 1:
-      		pane.setCenter(new GameView(pane));
+      		pane.getChildren().clear();
+      		UI ui = new UI();
+      		GameView  gv = new GameView(pane, ui);
+      		pane.getChildren().add(gv);
+      		pane.getChildren().add(ui);
+      		
       		break;
       	case 2:
       		break;
@@ -71,15 +70,8 @@ public class CoverView extends Canvas {
   }
 
 
-  /**
-   * The {@link EventHandler<ActionEvent>} of the start buttons.
-   */
+
   private class AnimateStarter implements EventHandler<ActionEvent> {
-    /**
-     * Invoked when a specific event of the type for which this handler is registered happens.
-     *
-     * @param event the event which occurred
-     */
     @Override
     public void handle(ActionEvent event) {
       tic++;
@@ -88,7 +80,7 @@ public class CoverView extends Canvas {
       if (x > 545 && x < 680 && y > 434 && y < 452) {
         gc.drawImage(fires.get(tic / 3 % 5), 19, 150, 548, 280, 530, 428, 168, 30);
       } else if (x > 550 && x < 670 && y > 584 && y < 602) {
-        gc.drawImage(fires.get(tic / 3 % 5), 19, 150, 548, 280, 530, 578, 150, 30);
+        gc.drawImage(fires.get(tic / 3 % 5), 19, 150, 548, 280, 540, 578, 150, 30);
       } else if (x > 535 && x < 670 && y > 485 && y < 501) {
         gc.drawImage(fires.get(tic / 3 % 5), 19, 150, 548, 280, 520, 478, 168, 30);
       } else if (x > 545 && x < 710 && y > 530 && y < 551) {
@@ -104,27 +96,19 @@ public class CoverView extends Canvas {
       gc.fillText("START GAME", 545, 450);
       gc.fillText("LOAD GAME", 550, 500);
       gc.fillText("INSTRUCTIONS", 535, 550);
-      gc.fillText("EXIT GAME", 545, 600);
+      gc.fillText("EXIT GAME", 555, 600);
       if (tic == 20) tic = 0;
 
 
     }
   }
 
-  /**
-   * The {@link EventHandler<MouseEvent>} for the user's mouse.
-   */
   private class MouseHandler implements EventHandler<MouseEvent> {
-    /**
-     * Invoked when a specific event of the type for which this handler is registered happens.
-     *
-     * @param e the event which occurred
-     */
     @Override
     public void handle(MouseEvent e) {
       double x = e.getX();
       double y = e.getY();
-      if (x > 540 && x < 605 && y > 434 && y < 452) {
+      if (x > 540 && x < 680 && y > 434 && y < 452) {
         option = 1;
         insOpen = false;
       } else if (x > 540 && x < 594 && y > 584 && y < 602) {
@@ -147,15 +131,8 @@ public class CoverView extends Canvas {
     }
   }
 
-  /**
-   * The {@link EventHandler<MouseEvent>} for user when he drags something.
-   */
+
   private class DragHandler implements EventHandler<MouseEvent> {
-    /**
-     * Invoked when a specific event of the type for which this handler is registered happens.
-     *
-     * @param event the event which occurred
-     */
     @Override
     public void handle(MouseEvent event) {
       x = (int) event.getX();

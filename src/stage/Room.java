@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import monster.Goblin;
 import monster.Monkey;
 import monster.Monster;
+import monster.Niumowang;
 
 public class Room {
 	private int No, x, y; // coordinate
@@ -21,8 +22,16 @@ public class Room {
 		No = c;
 		this.x = x;
 		this.y = y;
-		ml.add(new Monkey(400, 400));
-		ml.add(new Goblin(450, 400));
+		int mn = (int) (2 + Math.random() * 3);
+		while (mn-- != 0) {
+			if (Math.random() > 0.5) {
+				ml.add(new Monkey(getRandomX(), getRandomY()));
+			} else {
+				ml.add(new Goblin(getRandomX(), getRandomY()));
+			}
+		}
+		if (c == 9)
+			ml.add(new Niumowang(getRandomX(), getRandomY()));
 		canvas = new Canvas();
 		canvas.setWidth(1280);
 		canvas.setHeight(720);
@@ -66,6 +75,12 @@ public class Room {
 		return ml.isEmpty();
 	}
 	
+	public int getRandomX() {
+		return (int) (500 + Math.random() * 300);
+	}
 	
+	public int getRandomY() {
+		return (int) (300 + Math.random() * 100);
+	}
 
 }

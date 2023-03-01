@@ -1,6 +1,6 @@
 package character;
 import javafx.scene.image.Image;
-import weapon.MeleeWeapon;
+import weapon.Weapon;
 
 public abstract class Character {
 	private final int height = 100;  // height of character
@@ -8,15 +8,16 @@ public abstract class Character {
 	private double px; // position of horizontal-axis
 	private double py; // position of vertical-axis
 	private int h; // health
+	private int cur_h;
 	private int sp; // speed
-	private MeleeWeapon weapon;
+	private Weapon weapon;
 	private int num_phase;
 	
 	
 	public Character(int px, int py, int h, int sp, int np) {
 		this.px = px;
 		this.py = py;
-		this.h = h;
+		this.h = cur_h = h;
 		num_phase = np;
 		this.sp = sp;
 	}
@@ -53,15 +54,11 @@ public abstract class Character {
 		py = n;
 	}
 	
-	public void take(MeleeWeapon w) {
+	public void take(Weapon w) {
 		weapon = w;
 	}
 	
-	public int getRange() {
-		return weapon.getRange();
-	}
-	
-	public MeleeWeapon getWeapon() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
 
@@ -74,10 +71,15 @@ public abstract class Character {
 	}
 	
 	public int getHealth() {
+		return cur_h;
+	}
+	
+	public int getMaxHealth() {
 		return h;
 	}
 	
-	public  void getHur(int d) {
-		h -= d;
+	public  void getHurt(int d) {
+		cur_h -= d;
+		cur_h = cur_h >= 0 ? cur_h : 0;
 	}
 }

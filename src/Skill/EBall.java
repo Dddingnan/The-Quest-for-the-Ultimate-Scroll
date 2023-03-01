@@ -1,10 +1,4 @@
-package Skill;
-
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-
+package skill;
 
 
 public abstract class EBall {
@@ -13,15 +7,9 @@ public abstract class EBall {
 	private double incX, incY;
 	public double deg;
 	private int width, height;
-	private Image im_att;
-	private ImageView iv;
-	private BorderPane bp;
-	private int hit;
-	private boolean hit_start;
-	
 
 	
-	public EBall(int d, int sp, double sX, double sY, double fX, double fY, Image im, int wd, int ht) {
+	public EBall(int d, int sp, double sX, double sY, double fX, double fY, int wd, int ht) {
 		damage = d;
 		this.sX = sX;
 		this.sY = sY;
@@ -30,18 +18,35 @@ public abstract class EBall {
 		incY = Math.sin(deg) * sp;
 		width = wd;
 		height = ht;
-		im_att = im;
-		hit_start = false;
 	}
 	
-	public void setImView(BorderPane b) {
-		bp = b;
-		iv = new ImageView(im_att);
-		iv.setFitHeight(height);
-		iv.setFitWidth(width);
-		iv.setViewport(new Rectangle2D(0,0,48,48));
-		bp.getChildren().add(iv);
+	public void setsX(double sX) {
+		this.sX = sX;
 	}
+
+	public void setsY(double sY) {
+		this.sY = sY;
+	}
+
+	public double getsX() {
+		return sX;
+	}
+
+	public double getsY() {
+		return sY;
+	}
+
+	public double getIncX() {
+		return incX;
+	}
+
+	public double getIncY() {
+		return incY;
+	}
+	
+
+	
+	public abstract void setImView();
 	
 	public double getX(double d) {
 		return sX + width * d ;
@@ -51,13 +56,7 @@ public abstract class EBall {
 		return sY + height * d;
 	}
 	
-	public void update() {
-		sX += incX;
-		sY += incY;
-		iv.setX(sX);
-		iv.setY(sY);
-		iv.setRotate((iv.getRotate() + 30) % 360);
-	}
+	public abstract void update();
 	
 	
 	public int  getWidth() {
@@ -68,26 +67,15 @@ public abstract class EBall {
 		return damage;
 	}
 	
-	public void remove()  {
-		bp.getChildren().remove(iv);
+	public double getDegree() {
+		return deg;
 	}
 
-	public void hitStart()  {
-		hit = 0;
-		hit_start = true;
-		sX += incX * 5;
-		sY += incY * 5;
-
-	}
+	public abstract void hitStart();
 	
-	public boolean isHit() {
-		return hit_start;
-	}
+	public abstract boolean isHit();
 	
-	public boolean hitEffect(double x, double y)  {
-		iv.setViewport(new Rectangle2D(148 + 48 * (hit++ / 3), 0, 48, 48));
-
-		return hit == 12;
-	}
+	public abstract boolean hitEffect();
 	
+	public abstract void remove();
 }

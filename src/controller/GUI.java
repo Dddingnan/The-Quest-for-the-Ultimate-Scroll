@@ -33,7 +33,7 @@ public class GUI extends Application {
 		stage.setWidth(width);
 		BorderPane pane = new BorderPane();
 		pane.getChildren().add(mv);
-	    pane.setCenter(new CoverView(pane));
+	    pane.getChildren().add(new CoverView(pane));
 	    Scene scene = new Scene(pane, stage.getWidth(), stage.getHeight());
 	    stage.setTitle("Scroll");
 	    stage.setResizable(true);
